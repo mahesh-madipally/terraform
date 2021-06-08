@@ -35,3 +35,17 @@ resource "google_compute_firewall" "http-server" {
   target_tags   = ["http-server"]
 }
 
+resource "google_compute_firewall" "https-server" {
+  name    = "default-allow-https-dev1"
+  network = "default"
+
+  allow {
+    protocol = "tcp"
+    ports    = ["443"]
+  }
+
+  // Allow traffic from everywhere to instances with an http-server tag
+  source_ranges = ["0.0.0.0/0"]
+  target_tags   = ["https-server"]
+}
+
