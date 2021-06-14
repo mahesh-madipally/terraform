@@ -46,6 +46,6 @@ resource "google_compute_firewall" "https-server" {
 
   // Allow traffic from everywhere to instances with an http-server tag
   source_ranges = ["0.0.0.0/0"]
-  target_tags   = ["https-server"]
+  target_tags   = ["https-server","http-server"]
 }
 
