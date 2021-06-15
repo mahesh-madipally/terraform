@@ -16,7 +16,7 @@ provider "google" {
 resource "google_container_cluster" "my_k8s_cluster" {
   name               = var.cluster_name
   location           = var.region
-  initial_node_count = 2
+  initial_node_count = 1
 
 
   # Enable Workload Identity
