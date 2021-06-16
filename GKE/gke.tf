@@ -13,23 +13,19 @@ provider "google" {
 }
 
 # Create a GKE cluster
-resource "google_container_cluster" "my_k8s_cluster" {
+resource "google_container_cluster" "gke-terraform" {
   name               = var.cluster_name
   location           = var.region
-  initial_node_count = 2
-
-
-  # Enable Workload Identity
-  workload_identity_config {
-    identity_namespace = "${var.project_id}.svc.id.goog"
-  }
+  initial_node_count = 1
 
   node_config {
     machine_type = var.machine_type
     oauth_scopes = [
+      "https://www.googleapis.com/auth/cloud-platform",
+      "https://www.googleapis.com/auth/compute",
+      "https://www.googleapis.com/auth/devstorage.read_only",
       "https://www.googleapis.com/auth/logging.write",
-      "https://www.googleapis.com/auth/monitoring",
-    ]
-    
+      "https://www.googleapis.com/auth/monitoring"
+     ]   
   }
 }
